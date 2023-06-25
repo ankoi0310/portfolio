@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
@@ -20,14 +21,16 @@ module.exports = {
     extend: {
       colors: {
         primary: '#0a0a0a',
+        secondary: '#1a1a1a',
         accent: '#B809C3',
+        error: '#FF0000',
       },
       backgroundImage: {
-        site: "url('./assets/site-bg.jpg')",
-        about: "url('./assets/about.png')",
-        services: "url('./assets/services.png')",
+        site: "url('./assets/images/site-bg.jpg')",
+        about: "url('./assets/images/about.png')",
+        services: "url('./assets/images/services.png')",
       },
     },
   },
   plugins: [],
-};
+}

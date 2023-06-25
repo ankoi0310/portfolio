@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import Image from '../assets/avatar.svg'
+import Image from '../../assets/images/avatar.svg'
 import { motion } from 'framer-motion'
-import { fadeIn } from '../variants'
+import { fadeIn } from '../../variants'
 import { TypeAnimation } from 'react-type-animation'
 import { FaFacebookF, FaGithub, FaYoutube } from 'react-icons/fa'
 

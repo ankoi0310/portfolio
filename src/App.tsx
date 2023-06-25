@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react'
-import Header from './components/Header'
-import Banner from './components/Banner'
-import Nav from './components/Nav'
-import About from './components/About'
-import Services from './components/Services'
-import Work from './components/Work'
-import Contact from './components/Contact'
+import { RouterProvider } from 'react-router-dom'
 import { changeFavicon } from './favicon'
+import router from './routing/Router'
 
 function App() {
   useEffect(() => {
@@ -26,21 +21,11 @@ function App() {
     return () => {
       window
         .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', event => {})
+        .removeEventListener('change', _ => {})
     }
   }, [])
 
-  return (
-    <div className="bg-site bg-no-repeat bg-cover overflow-hidden">
-      <Header />
-      <Banner />
-      <Nav />
-      <About />
-      <Services />
-      <Work />
-      <Contact />
-    </div>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

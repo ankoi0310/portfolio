@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Link } from 'react-scroll'
-import { BiHomeAlt, BiUser } from 'react-icons/bi'
+import { BiHomeAlt, BiUser, BiNews } from 'react-icons/bi'
 import { BsBriefcase, BsChatSquareText, BsClipboardData } from 'react-icons/bs'
 
 interface NavProps {}
@@ -43,6 +43,16 @@ const Nav: FC<NavProps> = () => (
             'cursor-pointer w-[50px] h-[50px] flex items-center justify-center'
           }>
           <BsClipboardData />
+        </Link>
+        <Link
+          to={'sharing'}
+          activeClass="active"
+          smooth={true}
+          spy={true}
+          className={
+            'cursor-pointer w-[50px] h-[50px] flex items-center justify-center'
+          }>
+          <BiNews />
         </Link>
         <Link
           to={'work'}

@@ -1,5 +1,5 @@
-export const changeFavicon = mode => {
-  let link = document.querySelector('link[rel~="icon"]')
+export const changeFavicon = (mode: string) => {
+  let link = document.querySelector('link[rel~="icon"]') as HTMLLinkElement
   if (!link) {
     link = document.createElement('link')
     link.rel = 'icon'
