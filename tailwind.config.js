@@ -1,11 +1,13 @@
 module.exports = {
   important: true,
+  darkMode: ['class'],
+  experimental: {
+    darkModeVariant: true,
+  },
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
-      primary: 'Orbitron',
-      secondary: 'Rajdhani',
-      tertiary: 'Aldrich',
+      primary: 'Poppins, sans-serif',
     },
     container: {
       padding: {
@@ -19,11 +21,28 @@ module.exports = {
       xl: '1200px',
     },
     extend: {
+      keyframes: {
+        moving: {
+          '0%': { left: '-25px' },
+          '100%': { left: '100%' },
+        },
+      },
+      animation: {
+        moving: 'moving 2s linear infinite',
+      },
+      boxShadow: {
+        custom: '0 0 5px 5px rgb(0 0 0 / 0.1)',
+      },
       colors: {
         primary: '#0a0a0a',
         secondary: '#1a1a1a',
         accent: '#B809C3',
-        error: '#FF0000',
+        '--title-color': '#0B0A0A',
+        '--text-color': '#403A3A',
+        '--text-color-light': '#707070',
+        '--container-color': '#FAFAFA',
+        '--container-color-alt': '#F0EFEF',
+        '--body-color': '#FCFCFC',
       },
       backgroundImage: {
         site: "url('./assets/images/site-bg.jpg')",

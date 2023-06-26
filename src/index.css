@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.light {
-
-}
-
-.dark {
-
-}
-
 .btn {
   background: linear-gradient(
     92.23deg,
@@ -50,7 +42,7 @@
 
 @layer base {
   body {
-    @apply font-secondary text-lg leading-8 text-white;
+    @apply font-primary text-lg leading-8 text-white;
   }
 
   .h1 {
@@ -91,5 +83,15 @@
 
   .section {
     @apply py-8 lg:py-24 lg:h-screen flex items-center;
+  }
+}
+
+@layer components {
+  .underline-custom {
+    @apply w-full h-[5px] bg-gray-300 rounded-[3px] absolute top-[25px] left-0 overflow-hidden;
+  }
+
+  .underline-custom span {
+    @apply w-[15px] h-full bg-black rounded-[3px] absolute top-0 left-0 animate-moving;
   }
 }
