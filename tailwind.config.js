@@ -7,7 +7,10 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
-      primary: 'Poppins, sans-serif',
+      primary: 'Orbitron',
+      secondary: 'Rajdhani',
+      tertiary: 'Aldrich',
+      portfolio: ['Poppins', 'sans-serif'],
     },
     container: {
       padding: {
@@ -35,14 +38,7 @@ module.exports = {
       },
       colors: {
         primary: '#0a0a0a',
-        secondary: '#1a1a1a',
         accent: '#B809C3',
-        '--title-color': '#0B0A0A',
-        '--text-color': '#403A3A',
-        '--text-color-light': '#707070',
-        '--container-color': '#FAFAFA',
-        '--container-color-alt': '#F0EFEF',
-        '--body-color': '#FCFCFC',
       },
       backgroundImage: {
         site: "url('./assets/images/site-bg.jpg')",

@@ -41,21 +41,21 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <div className={'absolute bottom-5 right-5'}>
-        <button
-          className={
-            'p-4 rounded-full bg-black text-white dark:bg-white dark:text-black'
-          }
-          type={'button'}
-          title={'Toggle dark mode'}
-          onClick={() => changeMode(!darkMode)}>
-          {darkMode ? (
-            <MdDarkMode className={'w-[20px] h-[20px]'} />
-          ) : (
-            <MdLightMode className={'w-[20px] h-[20px]'} />
-          )}
-        </button>
-      </div>
+      {/*<div className={'absolute bottom-5 right-5'}>*/}
+      {/*  <button*/}
+      {/*    className={*/}
+      {/*      'p-4 rounded-full bg-black text-white dark:bg-white dark:text-black'*/}
+      {/*    }*/}
+      {/*    type={'button'}*/}
+      {/*    title={'Toggle dark mode'}*/}
+      {/*    onClick={() => changeMode(!darkMode)}>*/}
+      {/*    {darkMode ? (*/}
+      {/*      <MdDarkMode className={'w-[20px] h-[20px]'} />*/}
+      {/*    ) : (*/}
+      {/*      <MdLightMode className={'w-[20px] h-[20px]'} />*/}
+      {/*    )}*/}
+      {/*  </button>*/}
+      {/*</div>*/}
     </>
   )
 }

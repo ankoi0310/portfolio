@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import { createBrowserRouter } from 'react-router-dom'
 import Error from '../pages/Error'
 import Blog from '../pages/Blog'
+import Portfolio from '../pages/Portfolio/Portfolio'
 
 const router = createBrowserRouter([
   {
@@ -31,15 +32,15 @@ const router = createBrowserRouter([
         path: 'blog',
         element: <Blog />,
       },
-      {
-        path: 'portfolio',
-        element: <div>Portfolio</div>,
-      },
     ],
   },
   {
     element: <FullWidthLayout />,
     children: [
+      {
+        path: 'portfolio',
+        element: <Portfolio />,
+      },
       {
         path: '404',
         element: <Error errorCode={404} title={'Page Not Found'} />,

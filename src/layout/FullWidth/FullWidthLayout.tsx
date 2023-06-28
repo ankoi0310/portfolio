@@ -3,10 +3,6 @@ import { Outlet } from 'react-router-dom'
 
 interface FullWidthLayoutProps {}
 
-const FullWidthLayout: FC<FullWidthLayoutProps> = () => (
-  <div className={'w-screen h-screen'}>
-    <Outlet />
-  </div>
-)
+const FullWidthLayout: FC<FullWidthLayoutProps> = () => <Outlet />
 
 export default FullWidthLayout
