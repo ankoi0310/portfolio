@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import './Portfolio.css'
 import avatar from '../../assets/images/avatar.jpg'
 import {
@@ -17,9 +17,13 @@ import {
   BiCycling,
   BiCodeAlt,
   BiUpArrowAlt,
+  BiMoon,
+  BiDownload,
 } from 'react-icons/bi'
 import { BsFacebook, BsInstagram, BsLinkedin } from 'react-icons/bs'
 import { HashLink } from 'react-router-hash-link'
+import html2pdf from 'html2pdf.js/dist/html2pdf.bundle.min.js'
+import { Link } from 'react-router-dom'
 
 interface PortfolioProps {}
 
@@ -49,7 +53,17 @@ const scrollTop = () => {
   }
 }
 
+const scaleCV = () => {
+  document.body.classList.add('scale-cv')
+}
+
+const removeScaleCV = () => {
+  document.body.classList.remove('scale-cv')
+}
+
 const Portfolio: FC<PortfolioProps> = () => {
+  const [darkTheme, setDarkTheme] = useState(false)
+
   useEffect(() => {
     showMenu('nav-toggle', 'nav-menu')
 
@@ -82,16 +96,76 @@ const Portfolio: FC<PortfolioProps> = () => {
       window.addEventListener('scroll', scrollActive)
 
       window.addEventListener('scroll', scrollTop)
+
+      const themeButton = document.getElementById('theme-button')
+
+      // Previously selected topic (if user selected)
+      const selectedTheme = localStorage.getItem('selected-theme')
+
+      // We obtain the current theme that the interface has by validating the dark-theme class
+      setDarkTheme(document.body.classList.contains('dark-theme'))
+      const getCurrentTheme = () => (darkTheme ? 'dark' : 'light')
+
+      // We validate if the user previously chose a topic
+      if (selectedTheme) {
+        // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+        document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](
+          'dark-theme',
+        )
+      }
+
+      // Activate / deactivate the theme manually with the button
+      themeButton?.addEventListener('click', () => {
+        // Add or remove the dark / icon theme
+        document.body.classList.toggle('dark-theme')
+        // We save the theme and the current icon that the user chose
+        localStorage.setItem('selected-theme', getCurrentTheme())
+      })
+
+      // GENERATE PDF AREA
+      const areaCv = document.getElementById('area-cv')
+
+      const resumeButton = document.getElementById('resume-button')
+
+      // HTML2PDF options
+      let opt = {
+        margin: [0, -2, -2, 0],
+        filename: 'myResume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 4 },
+        jsPDF: {
+          format: 'a4',
+          orientation: 'portrait',
+        },
+      }
+
+      // Function to call areaCv and HTML2PDF options
+      function generateResume() {
+        html2pdf(areaCv, opt)
+      }
+
+      // When download button clicked
+      resumeButton?.addEventListener('click', () => {
+        console.log('clicked')
+        // 1. Add scale-cv class to body
+        scaleCV()
+
+        // 2. Generate PDF
+        generateResume()
+
+        // 3. Remove scale-cv class from body after 5 seconds
+        setTimeout(removeScaleCV, 1000)
+      })
     }
-  }, [])
+  }, [darkTheme])
 
   return (
     <>
       <header className={'l-header'} id="header">
         <nav className="nav bd-container">
-          <a href="#" className="nav__logo">
+          <HashLink to={'#home'} className="nav__logo">
             KOI
-          </a>
+          </HashLink>
 
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
@@ -140,7 +214,7 @@ const Portfolio: FC<PortfolioProps> = () => {
       </header>
 
       <main className={'l-main bd-container'}>
-        <div className="resume">
+        <div className="resume" id="area-cv">
           <div className="resume__left">
             {/* HOME */}
             <section className="home" id="home">
@@ -153,10 +227,11 @@ const Portfolio: FC<PortfolioProps> = () => {
                   </h1>
                   <h3 className="home__profession">Web Developer</h3>
 
+                  {/* Download CV button */}
                   <div>
                     <a
                       download
-                      href="/assets/pdf/abc.pdf"
+                      href="/assets/pdf/resume.pdf"
                       className="home__button-movil">
                       Download
                     </a>
@@ -176,11 +251,21 @@ const Portfolio: FC<PortfolioProps> = () => {
                   </span>
                 </div>
               </div>
+
+              {/* Theme change button */}
+              <BiMoon
+                className="change-theme"
+                title="Theme"
+                id="theme-button"
+              />
+
+              {/* Button to generate and download the pdf file. */}
+              <BiDownload
+                className="generate-pdf"
+                title="Generate PDF"
+                id="resume-button"
+              />
             </section>
-
-            {/* Download CV button */}
-
-            {/* Theme change button */}
 
             {/* SOCIAL */}
             <section className="social section">
