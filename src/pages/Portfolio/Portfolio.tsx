@@ -19,145 +19,68 @@ import {
   BiUpArrowAlt,
   BiMoon,
   BiDownload,
+  BiSun,
 } from 'react-icons/bi'
 import { BsFacebook, BsInstagram, BsLinkedin } from 'react-icons/bs'
 import { HashLink } from 'react-router-hash-link'
-import html2pdf from 'html2pdf.js/dist/html2pdf.bundle.min.js'
-import { Link } from 'react-router-dom'
+import {
+  showMenu,
+  linkAction,
+  scrollActive,
+  scrollTop,
+  scaleCV,
+  removeScaleCV,
+  generateResume,
+} from '../../utils/portfolio'
 
 interface PortfolioProps {}
-
-const showMenu = (toggleId: string, navId: string) => {
-  const toggle = document.getElementById(toggleId),
-    nav = document.getElementById(navId)
-
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('show-menu')
-    })
-  }
-}
-
-const linkAction = () => {
-  const navMenu = document.getElementById('nav-menu')
-  navMenu?.classList.remove('show-menu')
-}
-
-const scrollTop = () => {
-  const scrollTop = document.getElementById('scroll-top')
-
-  if (scrollTop) {
-    window.scrollY >= 200
-      ? scrollTop.classList.add('show-scroll')
-      : scrollTop.classList.remove('show-scroll')
-  }
-}
-
-const scaleCV = () => {
-  document.body.classList.add('scale-cv')
-}
-
-const removeScaleCV = () => {
-  document.body.classList.remove('scale-cv')
-}
 
 const Portfolio: FC<PortfolioProps> = () => {
   const [darkTheme, setDarkTheme] = useState(false)
 
-  useEffect(() => {
-    showMenu('nav-toggle', 'nav-menu')
+  const resumeProgress = () => {
+    // 1. Add scale-cv class to body
+    scaleCV()
 
-    const navLink = document.querySelectorAll('.nav__link')
+    // 2. Generate PDF
+    generateResume()
+
+    // 3. Remove scale-cv class from body after 500ms
+    setTimeout(removeScaleCV, 500)
+  }
+
+  const themeHandler = () => {
+    console.log('theme-button clicked')
+    document.body.classList.toggle('dark-theme')
+    setDarkTheme(document.body.classList.contains('dark-theme'))
+    localStorage.setItem('theme', darkTheme ? 'dark' : 'light')
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollTop)
+    window.addEventListener('scroll', scrollActive)
+
+    const navLink = document.querySelectorAll<HTMLElement>('.nav__link')
     navLink.forEach(n => n.addEventListener('click', linkAction))
 
+    setDarkTheme(document.body.classList.contains('dark-theme'))
+    localStorage.setItem('theme', darkTheme ? 'dark' : 'light')
+
+    const themeButton = document.getElementById('theme-button')
+    themeButton?.addEventListener('click', themeHandler)
+
+    const resumeButton = document.getElementById('resume-button')
+    resumeButton?.addEventListener('click', resumeProgress)
+
     return () => {
-      showMenu('nav-toggle', 'nav-menu')
-
-      const sections = document.querySelectorAll<HTMLElement>('section[id]')
-      const scrollActive = () => {
-        const scrollY = window.scrollY
-
-        sections.forEach(current => {
-          const sectionHeight = current.offsetHeight
-          const sectionTop = current.offsetTop - 50
-          const sectionId = current.getAttribute('id')
-
-          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document
-              .querySelector('.nav__menu a[href*=' + sectionId + ']')
-              ?.classList.add('active-link')
-          } else {
-            document
-              .querySelector('.nav__menu a[href*=' + sectionId + ']')
-              ?.classList.remove('active-link')
-          }
-        })
-      }
-      window.addEventListener('scroll', scrollActive)
-
-      window.addEventListener('scroll', scrollTop)
-
-      const themeButton = document.getElementById('theme-button')
-
-      // Previously selected topic (if user selected)
-      const selectedTheme = localStorage.getItem('selected-theme')
-
-      // We obtain the current theme that the interface has by validating the dark-theme class
-      setDarkTheme(document.body.classList.contains('dark-theme'))
-      const getCurrentTheme = () => (darkTheme ? 'dark' : 'light')
-
-      // We validate if the user previously chose a topic
-      if (selectedTheme) {
-        // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-        document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](
-          'dark-theme',
-        )
-      }
-
-      // Activate / deactivate the theme manually with the button
-      themeButton?.addEventListener('click', () => {
-        // Add or remove the dark / icon theme
-        document.body.classList.toggle('dark-theme')
-        // We save the theme and the current icon that the user chose
-        localStorage.setItem('selected-theme', getCurrentTheme())
-      })
-
-      // GENERATE PDF AREA
-      const areaCv = document.getElementById('area-cv')
-
-      const resumeButton = document.getElementById('resume-button')
-
-      // HTML2PDF options
-      let opt = {
-        margin: [0, -2, -2, 0],
-        filename: 'myResume.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 4 },
-        jsPDF: {
-          format: 'a4',
-          orientation: 'portrait',
-        },
-      }
-
-      // Function to call areaCv and HTML2PDF options
-      function generateResume() {
-        html2pdf(areaCv, opt)
-      }
-
-      // When download button clicked
-      resumeButton?.addEventListener('click', () => {
-        console.log('clicked')
-        // 1. Add scale-cv class to body
-        scaleCV()
-
-        // 2. Generate PDF
-        generateResume()
-
-        // 3. Remove scale-cv class from body after 5 seconds
-        setTimeout(removeScaleCV, 1000)
-      })
+      showMenu()
+      window.removeEventListener('scroll', scrollTop)
+      window.removeEventListener('scroll', scrollActive)
+      themeButton?.removeEventListener('click', themeHandler)
+      navLink.forEach(n => n.removeEventListener('click', linkAction))
+      resumeButton?.removeEventListener('click', resumeProgress)
     }
-  }, [darkTheme])
+  }, [darkTheme, themeHandler])
 
   return (
     <>
@@ -223,7 +146,7 @@ const Portfolio: FC<PortfolioProps> = () => {
                   <img src={avatar} alt="avatar" className={'home__img'} />
 
                   <h1 className="home__title">
-                    AN <b>HUYNH VAN HUU</b>
+                    <b>AN HUYNH VAN HUU</b>
                   </h1>
                   <h3 className="home__profession">Web Developer</h3>
 
@@ -253,11 +176,19 @@ const Portfolio: FC<PortfolioProps> = () => {
               </div>
 
               {/* Theme change button */}
-              <BiMoon
-                className="change-theme"
-                title="Theme"
-                id="theme-button"
-              />
+              {darkTheme ? (
+                <BiMoon
+                  className="change-theme"
+                  title="Theme"
+                  id="theme-button"
+                />
+              ) : (
+                <BiSun
+                  className="change-theme"
+                  title="Theme"
+                  id="theme-button"
+                />
+              )}
 
               {/* Button to generate and download the pdf file. */}
               <BiDownload
