@@ -165,7 +165,7 @@ body {
 
 h1, h2, h3, ul, p, span {
   @apply m-0;
-  line-height: normal !important;
+  line-height: initial !important;
 }
 
 h1, h2, h3 {
