@@ -1,3 +1,5 @@
+declare module 'tailwindcss/lib/util/flattenColorPalette';
+
 declare type NavItem = {
     label: string;
     href: string;
