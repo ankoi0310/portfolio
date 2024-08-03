@@ -13,15 +13,14 @@ const config = {
     theme: {
         container: {
             center: true,
-            padding: '1rem'
+            padding: '16px'
         },
         screens: {
             xs: '375px',
             sm: '640px',
             md: '768px',
-            lg: '1024px',
-            xl: '1280px',
-            '2xl': '1536px'
+            lg: '960px',
+            xl: '1280px'
         },
         fontFamily: {
             primary: 'var(--font-jetbrains-mono)'

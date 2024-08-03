@@ -1,23 +1,34 @@
 'use client'
 
 import React from 'react'
+import { motion } from 'framer-motion'
+import ContactForm from '@/app/contact/components/ContactForm'
+import ContactInfo from '@/app/contact/components/ContactInfo'
 
 const Contact = () => {
     return (
-        <div className='relative max-w-4xl mx-auto pb-40'>
-            <h2 className='text-white text-2xl md:text-6xl font-bold text-center'>
-                Feel free to reach out
-            </h2>
-            <div className='flex flex-col sm:flex-row items-center gap-4 mt-6'>
-                <button
-                    className='px-4 py-2 bg-violet-600 hover:bg-blue-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]'>
-                    Hire me
-                </button>
-                <button className='px-4 py-2  text-white '>
-                    Download CV
-                </button>
+        <motion.section
+            initial={{ opacity: 0 }}
+            animate={{
+                opacity: 1,
+                transition: {
+                    delay: 2.4,
+                    duration: 0.4,
+                    ease: 'easeIn'
+                }
+            }}
+            className='py-6'
+        >
+            <div className='container mx-auto'>
+                <div className='flex flex-col xl:flex-row gap-[30px]'>
+                    {/* form */}
+                    <ContactForm />
+
+                    {/* info */}
+                    <ContactInfo />
+                </div>
             </div>
-        </div>
+        </motion.section>
     )
 }
 export default Contact

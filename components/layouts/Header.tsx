@@ -8,10 +8,10 @@ import MobileNav from '@/components/layouts/MobileNav'
 const Header = () => {
     return (
         <header className='py-8 md:py-12 text-white'>
-            <div className='container sm:mx-auto flex justify-end sm:justify-between items-center'>
+            <div className='container mx-auto flex justify-between items-center'>
                 {/* logo */}
-                <Link href='/' className='hidden sm:block'>
-                    <h1 className='text-2xl font-semibold'>
+                <Link href='/'>
+                    <h1 className='text-2xl md:text-3xl lg:text-4xl font-semibold'>
                         Code <span className='text-accent'>With</span> Koi
                     </h1>
                 </Link>

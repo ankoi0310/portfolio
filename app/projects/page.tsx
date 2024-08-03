@@ -1,76 +1,48 @@
 'use client'
 
-import { HoverEffect } from '@/components/ui/card-hover-effect'
+import { useState } from 'react'
+import { projects } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import ProjectInfo from '@/app/projects/components/ProjectInfo'
+import ProjectCarousel from '@/app/projects/components/ProjectCarousel'
 
 const Projects = () => {
+    const [project, setProject] = useState(projects[0])
+
+    // const handleSlideChange = (swiper: SwiperClass) => {
+    //     const currentIndex = swiper.activeIndex
+    //     setProject(projects[currentIndex])
+    // }
+
     return (
-        <div className={'max-w-7xl mx-auto px-8 py-8'}>
-            <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                    delay: 0.3,
-                    duration: 0.8,
-                    ease: 'easeInOut'
-                }}
-                className='bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-3xl md:text-5xl font-bold dark:text-white text-center'>
-                Projects
-            </motion.div>
-            <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                    delay: 0.5,
-                    duration: 0.8,
-                    ease: 'easeInOut'
-                }}
-                className='font-extralight text-base md:text-2xl dark:text-neutral-200 text-center py-4'
-            >
-                Here are some of my recent projects.
-            </motion.div>
-            <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                    delay: 0.7,
-                    duration: 0.8,
-                    ease: 'easeInOut'
-                }}
-            >
-                <HoverEffect items={projects} />
-            </motion.div>
-        </div>
+        <motion.section
+            initial={{ opacity: 0 }}
+            animate={{
+                opacity: 1,
+                transition: {
+                    delay: 2.4,
+                    duration: 0.4,
+                    ease: 'easeIn'
+                }
+            }}
+            className={'min-h-[80vh] flex flex-col justify-center py-12 xl:px-0'}
+        >
+            <div className='container mx-auto'>
+                <div className='flex flex-col xl:flex-row xl:gap-[30px]'>
+                    <div className={cn(
+                        'w-full xl:w-[50%] xl:h-[460px]',
+                        'flex flex-col xl:justify-between order-2 xl:order-none'
+                    )}>
+                        <ProjectInfo project={project} />
+                    </div>
+                    <div className='w-full xl:w-[50%]'>
+                        <ProjectCarousel setProject={setProject} />
+                    </div>
+                </div>
+            </div>
+        </motion.section>
     )
 }
-
-const projects = [
-    {
-        title: 'eNLU - Sinh vien Nong Lam',
-        description: 'An app for students of Nong Lam University',
-        image: 'https://assets.aceternity.com/demos/lana-del-rey.jpeg',
-        ctaText: 'Play Store',
-        ctaLink: 'https://play.google.com/store/apps/details?id=it.cwk.enlu',
-        content: () => {
-            return (
-                <p>
-                    Lana Del Rey, an iconic American singer-songwriter, is celebrated for
-                    her melancholic and cinematic music style. Born Elizabeth Woolridge
-                    Grant in New York City, she has captivated audiences worldwide with
-                    her haunting voice and introspective lyrics. <br /> <br /> Her songs
-                    often explore themes of tragic romance, glamour, and melancholia,
-                    drawing inspiration from both contemporary and vintage pop culture.
-                    With a career that has seen numerous critically acclaimed albums, Lana
-                    Del Rey has established herself as a unique and influential figure in
-                    the music industry, earning a dedicated fan base and numerous
-                    accolades.
-                </p>
-            )
-        }
-    }
-]
 
 export default Projects

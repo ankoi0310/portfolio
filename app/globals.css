@@ -79,4 +79,12 @@
     .h3 {
         @apply text-xl xl:text-2xl leading-[1.1] font-semibold;
     }
+
+    .text-outline {
+        -webkit-text-stroke: 1px #FFFFFF;
+    }
+
+    .text-outline-hover {
+        -webkit-text-stroke: 1px #A855F7;
+    }
 }

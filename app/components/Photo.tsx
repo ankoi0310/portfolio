@@ -31,7 +31,7 @@ const Photo = () => {
                 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mix-blend-lighten'
             >
                 <Image
-                    src='/assets/images/home.png'
+                    src='/assets/images/home/avatar.png'
                     priority
                     quality='100'
                     fill
