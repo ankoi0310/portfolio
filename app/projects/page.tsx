@@ -10,11 +10,6 @@ import ProjectCarousel from '@/app/projects/components/ProjectCarousel'
 const Projects = () => {
     const [project, setProject] = useState(projects[0])
 
-    // const handleSlideChange = (swiper: SwiperClass) => {
-    //     const currentIndex = swiper.activeIndex
-    //     setProject(projects[currentIndex])
-    // }
-
     return (
         <motion.section
             initial={{ opacity: 0 }}

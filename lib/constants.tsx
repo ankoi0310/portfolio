@@ -125,17 +125,11 @@ export const projects: Project[] = [
     {
         id: '01',
         title: 'eNLU - Sinh vien Nong Lam',
-        description: 'An app for students of Nong Lam University',
+        description: 'An app for students of Nong Lam University. It provides a lot of useful features for students' +
+            ' such as checking grades, schedules, and more.',
         techStack: ['Flutter'],
         image: '/assets/images/projects/enlu.png',
         href: 'https://play.google.com/store/apps/details?id=it.cwk.enlu'
-    },
-    {
-        id: '02',
-        title: 'Portfolio',
-        description: 'A portfolio template for developers',
-        techStack: ['React', 'Next.js', 'Tailwind CSS'],
-        image: 'https://assets.aceternity.com/demos/lana-del-rey.jpeg'
     }
 ]
 
