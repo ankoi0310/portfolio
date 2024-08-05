@@ -6,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { about, education, experience, skills } from '@/lib/constants'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const Resume = () => {
     return (
@@ -27,7 +29,7 @@ const Resume = () => {
                     className='flex flex-col xl:flex-row gap-[60px]'
                 >
                     <TabsList className='flex flex-col w-full max-w-96 mx-auto xl:mx-0 gap-6'>
-                        <TabsTrigger value='experience'>Experience</TabsTrigger>
+                        <TabsTrigger value='experience'>Working Experience</TabsTrigger>
                         <TabsTrigger value='education'>Education</TabsTrigger>
                         <TabsTrigger value='skills'>Skills</TabsTrigger>
                         <TabsTrigger value='about'>About me</TabsTrigger>
@@ -104,11 +106,35 @@ const Resume = () => {
                                     <h3 className='text-4xl font-bold'>{skills.title}</h3>
                                     <p className='max-w-[600px] text-white/60 mx-auto xl:mx-0'>{skills.description}</p>
                                 </div>
-                                <ul>
+                                <ul className='flex flex-col gap-6'>
                                     {skills.items.map((item, index) => (
-                                        <li key={index}>
-                                            <h3>{item.title}</h3>
-                                            <p>{item.description}</p>
+                                        <li key={index} className='flex flex-col gap-4'>
+                                            <h3 className='text-center xl:text-start'>{item.title}</h3>
+                                            <div
+                                                className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-6 justify-items-center xl:justify-items-start items-center'
+                                            >
+                                                {item.techList.map((tech, index) => (
+                                                    <TooltipProvider delayDuration={100}>
+                                                        <Tooltip>
+                                                            <TooltipTrigger>
+                                                                <div className='relative w-[40px] h-[40px]'>
+                                                                    <Image
+                                                                        key={index}
+                                                                        src={tech.icon}
+                                                                        alt={tech.icon}
+                                                                        fill
+                                                                        objectFit='cover'
+                                                                        quality={100}
+                                                                    />
+                                                                </div>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <p>{tech.name}</p>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </TooltipProvider>
+                                                ))}
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>

@@ -74,16 +74,15 @@ export const about = {
 
 export const experience: Experience = {
     icon: '',
-    title: 'My experience',
+    title: 'Working Experience',
     description: '',
     items: []
 }
 
 export const education: Education = {
     icon: '',
-    title: 'Education',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ' +
-        'ut labore et dolore magna aliqua.',
+    title: 'My Education',
+    description: '',
     items: [
         {
             place: 'Nong Lam University - Ho Chi Minh City',
@@ -103,20 +102,79 @@ export const education: Education = {
 export const skills = {
     icon: '',
     title: 'Skills',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ' +
-        'ut labore et dolore magna aliqua.',
+    description: 'I have experience working with a range of technologies in web development and software engineering.',
     items: [
         {
             title: 'Frontend',
-            description: 'React, Next.js, Tailwind CSS, SCSS, HTML, CSS'
+            techList: [
+                {
+                    name: 'Nextjs',
+                    icon: '/assets/icons/nextjs.svg'
+                },
+                {
+                    name: 'Reactjs',
+                    icon: '/assets/icons/react.svg'
+                },
+                {
+                    name: 'Flutter',
+                    icon: '/assets/icons/flutter.svg'
+                },
+                {
+                    name: 'Tailwind CSS',
+                    icon: '/assets/icons/tailwindcss.svg'
+                }
+            ]
         },
         {
             title: 'Backend',
-            description: 'Node.js, Express, MongoDB, MySQL, Firebase'
+            techList: [
+                {
+                    name: 'Java',
+                    icon: '/assets/icons/java.svg'
+                },
+                {
+                    name: 'Nodejs',
+                    icon: '/assets/icons/nodejs.svg'
+                },
+                {
+                    name: 'Express',
+                    icon: '/assets/icons/express.svg'
+                }
+            ]
+        },
+        {
+            title: 'Database',
+            techList: [
+                {
+                    name: 'MySQL',
+                    icon: '/assets/icons/mysql.svg'
+                },
+                {
+                    name: 'MongoDB',
+                    icon: '/assets/icons/mongodb.svg'
+                },
+                {
+                    name: 'PostgreSQL',
+                    icon: '/assets/icons/postgresql.svg'
+                },
+                {
+                    name: 'Firebase',
+                    icon: '/assets/icons/firebase.svg'
+                }
+            ]
         },
         {
             title: 'Others',
-            description: 'Git, Docker, CI/CD, Agile, Scrum'
+            techList: [
+                {
+                    name: 'GitHub',
+                    icon: '/assets/icons/github.svg'
+                },
+                {
+                    name: 'Trello',
+                    icon: '/assets/icons/trello.svg'
+                }
+            ]
         }
     ]
 }
